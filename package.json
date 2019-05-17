@@ -7,8 +7,7 @@
     "test": "jest --coverage",
     "watch": "jest --watchAll",
     "build": "tsc --noEmit false",
-    "prepack": "rm -f tsconfig.tsbuildinfo && rm -rf lib && npm run build",
-    "postinstall": "./bin/run"
+    "prepack": "rm -f tsconfig.tsbuildinfo && rm -rf lib && npm run build"
   },
   "author": "",
   "license": "ISC",
