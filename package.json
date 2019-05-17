@@ -2,7 +2,8 @@
   "name": "@bittrd/siccly",
   "version": "0.0.0",
   "description": "(S)imple (I)nversion of (C)ontrol (C)ontainer (ly)",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --coverage",
     "watch": "jest --watchAll",
