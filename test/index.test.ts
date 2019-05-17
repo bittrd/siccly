@@ -1,12 +1,14 @@
 import { TYPES } from './mocks/kernel';
 import { Shoes } from './mocks/shoes';
 import { Me } from './mocks/me';
-import { InjectionError } from '../src/errors/injection-error';
-import { DuplicateInterfaceName } from '../src/errors/duplicate-interface-name';
-import { ReBindError } from '../src/errors/bind-error';
 import { Nike } from './mocks/nike';
 import { Adidas } from './mocks/adidas';
 import { Kernel, Type } from '../src';
+import {
+  InjectionError,
+  ReBindError,
+  DuplicateInterfaceName,
+} from '../src/errors';
 
 describe('kernel tests', () => {
   it('should resolve Nike class for Shoes', () => {
