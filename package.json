@@ -1,5 +1,5 @@
 {
-  "name": "siccly",
+  "name": "@bittrd/siccly",
   "version": "0.0.0",
   "description": "(S)imple (I)nversion of (C)ontrol (C)ontainer (ly)",
   "main": "index.js",
