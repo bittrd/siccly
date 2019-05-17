@@ -9,9 +9,9 @@
     "watch": "jest --watchAll",
     "build": "tsc --noEmit false",
     "prepack": "rm -f tsconfig.tsbuildinfo && rm -rf lib && npm run build",
-    "major": "npm version --major && npm publish",
-    "minor": "npm version --minor && npm publish",
-    "patch": "npm version --patch && npm publish"
+    "major": "npm version major && npm publish",
+    "minor": "npm version minor && npm publish",
+    "patch": "npm version patch && npm publish"
   },
   "author": "",
   "license": "ISC",
