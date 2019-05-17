@@ -22,6 +22,18 @@ export class Kernel {
     }
     this._bindMap.set(intf.name, impl);
   }
+  public rebind<TInterface>(intf: Class<TInterface>): Bind<TInterface>;
+  public rebind<TInterface>(
+    intf: Class<TInterface>,
+    impl?: Class<TInterface>,
+  ): void;
+  public rebind<TInterface>(
+    intf: Class<TInterface>,
+    impl?: Class<TInterface>,
+  ): Bind<TInterface> | void {
+    this._bindMap.delete(intf.name);
+    return this.bind(intf, impl);
+  }
   public get<TInterface>(x: Class<TInterface>): TInterface {
     const objectBuilder = this._bindMap.get(x.name);
     if (objectBuilder) {

@@ -1,6 +1,6 @@
 import { Shoes } from './shoes';
 
-export class Nike implements Shoes {
+export class BittrdBrand implements Shoes {
   areTied(): boolean {
     return true;
   }

@@ -1,8 +1,8 @@
 import { TYPES } from './mocks/kernel';
 import { Shoes } from './mocks/shoes';
 import { Me } from './mocks/me';
-import { Nike } from './mocks/nike';
-import { Adidas } from './mocks/adidas';
+import { BittrdBrand } from './mocks/bittrd-brand';
+import { BadBrand } from './mocks/bad-brand';
 import { Kernel, Type } from '../src';
 import {
   InjectionError,
@@ -13,30 +13,30 @@ import {
 describe('kernel tests', () => {
   it('should resolve Nike class for Shoes', () => {
     const container = new Kernel();
-    container.bind(TYPES.Shoes).toClass(Nike);
+    container.bind(TYPES.Shoes).toClass(BittrdBrand);
     const me = container.get(TYPES.Shoes);
     const result = me.areTied();
     expect(result).toBeTruthy();
-    expect((<Object>(<unknown>me)).constructor.name).toBe(Nike.name);
+    expect((<Object>(<unknown>me)).constructor.name).toBe(BittrdBrand.name);
   });
   it('should resolve Adidas class for Shoes', () => {
     const container = new Kernel();
-    container.bind(TYPES.Shoes).toClass(Adidas);
+    container.bind(TYPES.Shoes).toClass(BadBrand);
     const me = container.get(TYPES.Shoes);
     const result = me.areTied();
     expect(result).toBeFalsy();
-    expect((<Object>(<unknown>me)).constructor.name).toBe(Adidas.name);
+    expect((<Object>(<unknown>me)).constructor.name).toBe(BadBrand.name);
   });
   it('should return new instance every time for class binding', () => {
     const container = new Kernel();
-    container.bind(TYPES.Shoes).toClass(Nike);
+    container.bind(TYPES.Shoes).toClass(BittrdBrand);
     const first = container.get(TYPES.Shoes);
     const second = container.get(TYPES.Shoes);
     expect(first).not.toBe(second);
   });
   it('should return same instance every time for singleton binding', () => {
     const container = new Kernel();
-    const singleton = new Nike();
+    const singleton = new BittrdBrand();
     container.bind(TYPES.Shoes).toSingleton(singleton);
     const first = container.get(TYPES.Shoes);
     const second = container.get(TYPES.Shoes);
@@ -45,7 +45,7 @@ describe('kernel tests', () => {
   });
   it('should inject shoes into runner that are tied', () => {
     const container = new Kernel();
-    container.bind(TYPES.Shoes).toClass(Nike);
+    container.bind(TYPES.Shoes).toClass(BittrdBrand);
     container.bind(TYPES.Runner).toClass(Me);
     const runner = container.get(TYPES.Runner);
     const result = runner.run();
@@ -53,7 +53,7 @@ describe('kernel tests', () => {
   });
   it('should inject shoes into runner that are untied', () => {
     const container = new Kernel();
-    container.bind(TYPES.Shoes).toClass(Adidas);
+    container.bind(TYPES.Shoes).toClass(BadBrand);
     container.bind(TYPES.Runner).toClass(Me);
     const runner = container.get(TYPES.Runner);
     const result = runner.run();
@@ -66,12 +66,21 @@ describe('kernel tests', () => {
       container.get(TYPES.Runner);
     }).toThrow(new InjectionError('Shoes'));
   });
-  it('should throw error if you rebind the same interface', () => {
+  it('should throw error if you bind the same interface twice', () => {
     const container = new Kernel();
-    container.bind(TYPES.Shoes).toClass(Nike);
+    container.bind(TYPES.Shoes).toClass(BittrdBrand);
     expect(() => {
-      container.bind(TYPES.Shoes).toClass(Adidas);
-    }).toThrow(new ReBindError('Shoes', Adidas.name));
+      container.bind(TYPES.Shoes).toClass(BadBrand);
+    }).toThrow(new ReBindError('Shoes', BadBrand.name));
+  });
+  it('should succeed if you rebind the same interface after binding once', () => {
+    const container = new Kernel();
+    container.bind(TYPES.Shoes).toClass(BittrdBrand);
+    const nike = container.get(TYPES.Shoes);
+    container.rebind(TYPES.Shoes).toClass(BadBrand);
+    const adidas = container.get(TYPES.Shoes);
+    expect(nike).toBeInstanceOf(BittrdBrand);
+    expect(adidas).toBeInstanceOf(BadBrand);
   });
   it('should throw error if you try converting the same interface to a type twice', () => {
     Type<Shoes>('TestBinding');
