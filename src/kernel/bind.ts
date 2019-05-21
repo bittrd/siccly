@@ -6,6 +6,17 @@ export class Bind<T> {
     private readonly kernel: Kernel,
     private readonly intf: Class<T>,
   ) {}
+  public toMethod(method: () => T): void;
+  public toMethod(method: (container: Kernel) => T): void;
+  public toMethod(method: (container: Kernel) => T) {
+    const scope = this;
+    class Method {
+      constructor() {
+        return method(scope.kernel);
+      }
+    }
+    this.kernel.bind(this.intf, Method);
+  }
   public toClass(impl: Class<T>) {
     this.kernel.bind(this.intf, impl);
   }
