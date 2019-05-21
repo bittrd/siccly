@@ -37,15 +37,18 @@ export class Kernel {
   public get<TInterface>(x: Class<TInterface>): TInterface {
     const objectBuilder = this._bindMap.get(x.name);
     if (objectBuilder) {
-      const args = [];
-      if (this.canInject(objectBuilder)) {
-        for (const type of objectBuilder.inject) {
-          args.push(this.get(type));
-        }
-      }
-      return new objectBuilder(...args);
+      return this.createOne(objectBuilder);
     }
     throw new InjectionError(x.name);
+  }
+  public createOne<TInterface>(objectBuilder: Class<TInterface>): TInterface {
+    const args = [];
+    if (this.canInject(objectBuilder)) {
+      for (const type of objectBuilder.inject) {
+        args.push(this.get(type));
+      }
+    }
+    return new objectBuilder(...args);
   }
   private canInject<T>(x: any): x is InjectableClass & Class<T> {
     return isArray(x.inject);

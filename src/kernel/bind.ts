@@ -9,12 +9,22 @@ export class Bind<T> {
   public toClass(impl: Class<T>) {
     this.kernel.bind(this.intf, impl);
   }
-  public toSingleton(instance: T) {
+  public toSingleton(impl: Class<T>): void;
+  public toSingleton(impl: T): void;
+  public toSingleton(instanceOrClass: T | Class<T>) {
+    const instance = this.isInstanceOfClass(instanceOrClass)
+      ? instanceOrClass
+      : this.kernel.createOne(instanceOrClass);
     class Singleton {
       constructor() {
         return instance;
       }
     }
     this.kernel.bind(this.intf, Singleton);
+  }
+  private isInstanceOfClass(
+    instanceOrClass: T | Class<T>,
+  ): instanceOrClass is T {
+    return typeof instanceOrClass !== 'function';
   }
 }

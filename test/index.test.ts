@@ -43,6 +43,13 @@ describe('kernel tests', () => {
     expect(first).toBe(singleton);
     expect(first).toBe(second);
   });
+  it('should return same instance every time for singleton class binding', () => {
+    const container = new Kernel();
+    container.bind(TYPES.Shoes).toSingleton(BittrdBrand);
+    const first = container.get(TYPES.Shoes);
+    const second = container.get(TYPES.Shoes);
+    expect(first).toBe(second);
+  });
   it('should inject shoes into runner that are tied', () => {
     const container = new Kernel();
     container.bind(TYPES.Shoes).toClass(BittrdBrand);
