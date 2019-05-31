@@ -1,4 +1,4 @@
-import { Kernel } from './kernel';
+import { Kernel } from './container';
 import { Class } from './class';
 
 export class Bind<T> {
