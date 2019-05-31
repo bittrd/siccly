@@ -11,6 +11,9 @@
     "prepack": "rm -f tsconfig.tsbuildinfo && rm -rf lib && npm run build",
     "release": "standard-version"
   },
+  "files": [
+    "lib/"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
