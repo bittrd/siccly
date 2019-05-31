@@ -1,5 +1,7 @@
 # Siccly - Simple Inversion of Control Container
 
+[![npm (scoped)](https://img.shields.io/npm/v/@bittrd/siccly.svg)](https://www.npmjs.com/package/@bittrd/siccly)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 <!--toc-start-->
 
 - [Usage](#Usage)
