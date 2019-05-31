@@ -1,2 +1,2 @@
-export { Kernel } from './kernel/kernel';
-export { Type } from './kernel/type';
+export { Kernel } from './container/container';
+export { Type } from './container/type';
