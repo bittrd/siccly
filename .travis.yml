@@ -1,19 +1,22 @@
 language: node_js
 node_js:
+- 12
 - 10
-- 9
 - 8
-- 7
 - 6
+
 install:
 - npm install
 script:
 - npm run ci:test
-deploy:
-  provider: script
-  script: bash npm run release
-  on:
-    branch: master
+
+jobs:
+  include:
+    - stage: release
+      node_js: "12"
+      script: npm run release
+      on:
+        branch: master
 env:
   global:
     secure: cX+O5XQz8J9WyryoUHC+fGYIjmxmwZGMC3Q6XXtzl1oc9hGyhmRy5DLRJeZYuv6Puxjgg0tAbRISc6mIp9+kGV2NVCsI/FBURE4mYGn0iZnsOqFlAywqv3ngXcwJFkmc4/YaEElzEpucWMgY4uevJjP4s2DwO8GemXvEUWYg6pxJfSOFsA6UBAFqOAB0miZ9tJzcC0C8NkBzL9Y0uy6iDqj7IySca/6Cde52rLaQxEJ7+rn9wTvkUNureW6bQY/6JEksaoTqnSFgpG5Xdj/HnGvP+IAqeOCmHT5kGkjxZCzgcCA+Xu3PD5lo5pUbkFofPsnGP68NHmiOKp1D1K4xN0IZc9uQkGeHzj1z0XmlcWw+9dDEdtqlLoogTtznDGwujMszigqGESA3JiPe02SfMd4Rwj8kUZ3pxWSLGJ56HM25k3G24CrveJ0B9BfEHMf5nGmRx0wrGquzq+/a1fADBuOjTXcUS0E7kqTEdDV5vBzkFqDTd8nCnGISFTyYp/ppVnuYY4UC9Ke3qXVahi5cPvS27lBMSe0X4+WhvsQAdbm9QoQz+k+xTSjKv0tpFcBVeDjRnIO4Z6OHR14SlrkSl6wD3g59mv1J1x25XMWgvr5LBu1RUfDkgKtUl3jqQ0SI5ODhCbyD/QpOH3CpDZ/1WU86rXGZkcCRqi5R3QT12h4=
