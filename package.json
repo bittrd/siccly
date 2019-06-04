@@ -10,7 +10,7 @@
     "watch": "jest --watchAll",
     "build": "tsc --noEmit false",
     "prepack": "rm -f tsconfig.tsbuildinfo && rm -rf lib && npm run build",
-    "release": "semantic-release --dry-run"
+    "release": "semantic-release"
   },
   "files": [
     "lib/"
